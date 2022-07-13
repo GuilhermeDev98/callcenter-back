@@ -26,8 +26,34 @@ Route::prefix('users')->group(function () {
     Route::post('/', ['App\Http\Controllers\Api\UserController', 'store']);
 });
 
+Route::prefix('employees')->group(function () {
+    Route::get('/', ['App\Http\Controllers\Api\EmployeeController', 'index']);
+});
+
+Route::prefix('attendances')->group(function () {
+    Route::get('/', ['App\Http\Controllers\Api\AttendanceController', 'index']);
+    Route::post('/', ['App\Http\Controllers\Api\AttendanceController', 'store']);
+    Route::get('/uuid', ['App\Http\Controllers\Api\AttendanceController', 'generateAttendanceUUID']);
+    Route::put('/{Attendance}', ['App\Http\Controllers\Api\AttendanceController', 'update']);
+
+});
+
+Route::prefix('memos')->group(function () {
+    Route::get('/{atenndance}', ['App\Http\Controllers\Api\MemoController', 'search']);
+    Route::post('/', ['App\Http\Controllers\Api\MemoController', 'store']);
+});
+
+Route::prefix('clients')->group(function () {
+    Route::get('/{registration}', ['App\Http\Controllers\Api\ClientController', 'index']);
+    Route::get('/search/{search}', ['App\Http\Controllers\Api\ClientController', 'search']);
+    Route::get('/{registration}/logs', ['App\Http\Controllers\Api\ClientController', 'showLogs']);
+    Route::get('/{registration}/attendances', ['App\Http\Controllers\Api\ClientController', 'showAttendances']);
+    Route::post('/', ['App\Http\Controllers\Api\ClientController', 'store']);
+});
+Route::apiResource('roles', 'App\Http\Controllers\Api\RoleController');
+
+
 Route::middleware(['auth:sanctum', 'CheckIfUserCanAccessAction'])->group(function () {
-    Route::apiResource('roles', 'App\Http\Controllers\Api\RoleController');
     Route::patch('/roles/{role}/permission', ['App\Http\Controllers\Api\RoleController', 'associatePermission']);
     Route::patch('/users/{user}/role/{role}', ['App\Http\Controllers\Api\UserController', 'associateRole']);
     Route::apiResource('permissions', 'App\Http\Controllers\Api\PermissionController');

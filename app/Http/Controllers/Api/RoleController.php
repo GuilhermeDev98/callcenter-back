@@ -16,11 +16,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $role = Role::with('permissions')->get();
+        $roles = Role::with('permissions')->orderBy('created_at', 'desc')->paginate(10);
 
-        return response()->json([
-            'data' => $role
-        ], 200);
+        return response()->json($roles, 200);
     }
 
     /**
@@ -44,9 +42,8 @@ class RoleController extends Controller
         $role = Role::create($request->all());
 
         return response()->json([
-            'message' => 'Created',
             'data' => $role
-        ], 204);
+        ]);
     }
 
     /**

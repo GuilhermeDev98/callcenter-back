@@ -38,18 +38,18 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $userData = $request->all();
-        $userData['password'] = bcrypt($userData['password']);
+        $userData['password'] = bcrypt($request->email);
 
         if (!$user = $user->create($userData))
             abort(500, 'Erro ao Criar Um Novo Usuário');
         
-        $roleUser = Role::where('name', 'User')->first();
+        $roleUser = Role::where('name', $request->sector)->first();
 
         $user->role()->associate($roleUser);
         $user->save();
 
         return response()->json([
-            'message' => 'Created',
+            'message' => 'Usuário Criado Com Sucesso!',
             'data' => $user
         ]);
     }
