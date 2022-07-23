@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+Use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -14,11 +15,14 @@ class LoginController extends Controller
             abort(401, 'E-Mail Ou Senha Inválidos !');
 
         $token = auth()->user()->createToken('access_token');
+        $user = User::where('id', auth()->user()->id)->with('role.permissions')->first();
+
+
 
         return response()->json([
             'data' => [
                 'token' => $token->plainTextToken,
-                'user' => auth()->user()
+                'user' => $user
             ]
         ]);
     }

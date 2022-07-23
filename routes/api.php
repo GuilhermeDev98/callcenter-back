@@ -28,6 +28,7 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('employees')->group(function () {
     Route::get('/', ['App\Http\Controllers\Api\EmployeeController', 'index']);
+    Route::delete('/{user}', ['App\Http\Controllers\Api\EmployeeController', 'delete']);
 });
 
 Route::prefix('attendances')->group(function () {
@@ -50,11 +51,13 @@ Route::prefix('clients')->group(function () {
     Route::get('/{registration}/attendances', ['App\Http\Controllers\Api\ClientController', 'showAttendances']);
     Route::post('/', ['App\Http\Controllers\Api\ClientController', 'store']);
 });
+
 Route::apiResource('roles', 'App\Http\Controllers\Api\RoleController');
+Route::apiResource('permissions', 'App\Http\Controllers\Api\PermissionController');
+Route::patch('/roles/{role}/permission', ['App\Http\Controllers\Api\RoleController', 'associatePermission']);
+Route::patch('/users/{user}/role/{role}', ['App\Http\Controllers\Api\UserController', 'associateRole']);
 
 
 Route::middleware(['auth:sanctum', 'CheckIfUserCanAccessAction'])->group(function () {
-    Route::patch('/roles/{role}/permission', ['App\Http\Controllers\Api\RoleController', 'associatePermission']);
-    Route::patch('/users/{user}/role/{role}', ['App\Http\Controllers\Api\UserController', 'associateRole']);
-    Route::apiResource('permissions', 'App\Http\Controllers\Api\PermissionController');
+    
 });

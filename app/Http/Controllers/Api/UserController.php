@@ -96,7 +96,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json([], 200);
     }
 
     public function associateRole(User $user, Role $role){

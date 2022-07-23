@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::with('permissions')->orderBy('created_at', 'desc')->paginate(10);
+        $roles = Role::with('permissions')->orderBy('created_at', 'desc')->paginate(5);
 
         return response()->json($roles, 200);
     }
@@ -39,7 +39,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+
         $role = Role::create($request->all());
+        $role->permissions()->attach($request->permissions);
 
         return response()->json([
             'data' => $role
@@ -77,7 +79,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->name = $request->name;
+        $role->save();
+
+        $role->permissions()->sync($request->permissions);
+
+        return response()->json([
+            'data' => $role
+        ]);
     }
 
     /**
@@ -88,7 +97,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return response()->json([], 200);
     }
 
     public function associatePermission(Role $role, Request $request){

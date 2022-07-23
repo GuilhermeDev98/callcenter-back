@@ -15,11 +15,10 @@ class PermissionController extends Controller
      */
     public function index()
     {
-      $role = Permission::all();
+      $permissions = Permission::paginate(10);
 
-      return response()->json([
-          'data' => $role
-      ], 200);
+      return response()->json($permissions, 200);
+
     }
 
     /**
@@ -79,7 +78,12 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $permission->name = $request->name;
+        $permission->save();
+
+        return response()->json([
+            'data' => $permission
+        ]);
     }
 
     /**
@@ -90,6 +94,8 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+
+        return response()->json([], 200);
     }
 }
