@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create([
             "name" => "Guilherme Santos",
             "email" => "guilhermedev@hotmail.com",
-            "password" => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            "password" => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", //password
             "role_id" => 1
         ]);
 
         \App\Models\Permission::create(["name" => "dashboard.show"]);
         \App\Models\Permission::create(["name" => "attendance.show"]);
         \App\Models\Permission::create(["name" => "role.show"]);
-        \App\Models\Permission::create(["name" => "permission"]);
+        \App\Models\Permission::create(["name" => "permission.show"]);
         \App\Models\Permission::create(["name" => "client.show"]);
         \App\Models\Permission::create(["name" => "employee.show"]);
 

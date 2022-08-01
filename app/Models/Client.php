@@ -8,7 +8,7 @@ use Laravel\Scout\Searchable;
 
 class Client extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     protected $fillable = [
         'registration',
