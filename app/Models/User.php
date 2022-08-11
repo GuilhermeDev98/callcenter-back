@@ -23,7 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        "role_id"
+        "role_id",
+        "ramal_id",
+        "ramal_number",
+        "ramal_webphone"
     ];
 
     /**
@@ -47,5 +50,9 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
+    }
+
+    public function team(){
+        return $this->hasOneThrough('App\Models\Team', 'App\Models\User', 'id', 'id');
     }
 }

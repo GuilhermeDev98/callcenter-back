@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use TotalVoice\Client as TotalVoiceClient;
 
 class UserController extends Controller
 {
@@ -38,16 +39,33 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $userData = $request->all();
+
         $userData['password'] = bcrypt($request->email);
 
         if (!$user = $user->create($userData))
             abort(500, 'Erro ao Criar Um Novo Usuário');
         
-        $roleUser = Role::where('name', $request->sector)->first();
+        
+        if($request->sector){
+            $roleUser = Role::where('id', $request->sector)->first();
 
-        $user->role()->associate($roleUser);
-        $user->save();
+            $user->role()->associate($roleUser);
+            $user->save();
+        }
 
+        if($request->createRamal){
+
+            // Cria Ramal na Totalvoice
+            $client = new TotalVoiceClient('780e26bcd1bcc917fa0fcd0e78af8514');
+            $dados = [
+                "login"=> $request->email,
+                "gravar_audio" => true,
+                "ligacao_celular" => true,
+                "ligacao_externa" => true
+            ];
+            $client->central->criarRamal($dados);
+        }
+        
         return response()->json([
             'message' => 'Usuário Criado Com Sucesso!',
             'data' => $user

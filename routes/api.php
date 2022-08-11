@@ -28,6 +28,7 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('employees')->group(function () {
     Route::get('/', ['App\Http\Controllers\Api\EmployeeController', 'index']);
+    Route::get('/{user}', ['App\Http\Controllers\Api\EmployeeController', 'show']);
     Route::delete('/{user}', ['App\Http\Controllers\Api\EmployeeController', 'delete']);
 });
 
@@ -44,6 +45,17 @@ Route::prefix('memos')->group(function () {
     Route::post('/', ['App\Http\Controllers\Api\MemoController', 'store']);
 });
 
+Route::prefix('teams')->group(function () {
+    Route::post('/', ['App\Http\Controllers\Api\TeamController', 'store']);
+    Route::get('{team}', ['App\Http\Controllers\Api\TeamController', 'show']);
+    Route::patch('{team}/employees', ['App\Http\Controllers\Api\TeamController', 'editEmployees']);
+});
+
+Route::apiResource('roles', 'App\Http\Controllers\Api\RoleController');
+Route::apiResource('permissions', 'App\Http\Controllers\Api\PermissionController');
+Route::patch('/roles/{role}/permission', ['App\Http\Controllers\Api\RoleController', 'associatePermission']);
+Route::patch('/users/{user}/role/{role}', ['App\Http\Controllers\Api\UserController', 'associateRole']);
+
 Route::prefix('clients')->group(function () {
     Route::get('/{registration}', ['App\Http\Controllers\Api\ClientController', 'index']);
     Route::get('/search/{search}', ['App\Http\Controllers\Api\ClientController', 'search']);
@@ -52,12 +64,6 @@ Route::prefix('clients')->group(function () {
     Route::post('/', ['App\Http\Controllers\Api\ClientController', 'store']);
 });
 
-Route::apiResource('roles', 'App\Http\Controllers\Api\RoleController');
-Route::apiResource('permissions', 'App\Http\Controllers\Api\PermissionController');
-Route::patch('/roles/{role}/permission', ['App\Http\Controllers\Api\RoleController', 'associatePermission']);
-Route::patch('/users/{user}/role/{role}', ['App\Http\Controllers\Api\UserController', 'associateRole']);
-
-
 Route::middleware(['auth:sanctum', 'CheckIfUserCanAccessAction'])->group(function () {
-    
+
 });

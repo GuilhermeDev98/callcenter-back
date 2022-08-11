@@ -9,7 +9,7 @@ use App\Models\User;
 class EmployeeController extends Controller
 {
     public function index(){
-        $employees = User::where('role_id', '!=', 'null')->with('role')->orderBy('created_at', 'desc')->paginate(10);
+        $employees = User::where('role_id', '!=', 'null')->with('role', 'team.supervisor')->orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json($employees);
     }
@@ -18,5 +18,9 @@ class EmployeeController extends Controller
     {
         $user->delete();
         return response()->json([], 200);
+    }
+
+    public function show(User $user){
+        return response()->json($user->load('role', 'team.supervisor'));
     }
 }

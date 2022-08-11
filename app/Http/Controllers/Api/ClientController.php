@@ -8,12 +8,13 @@ use Illuminate\Support\Str;
 use App\Models\Client;
 use App\Models\User;
 
+
 class ClientController extends Controller
 {
 
     public function index(Request $request)
     {
-        $client = Client::where('registration', $request->registration)->with('user')->first();
+        $client = Client::where('registration', $request->registration)->with('user', 'documents')->first();
 
         return response()->json($client, 200);
     }
@@ -48,6 +49,13 @@ class ClientController extends Controller
             $request['user_id'] = $user->id;
 
             $client = Client::create($request->all());
+
+            if($request->documents){
+                $client->documents()->createMany($request->documents);
+            }
+
+            $client->logs()->create(['description' => 'Usuário Registrado por: '. auth()->user()->name . '('. auth()->user()->id .')']);
+
             return response()->json([
                 'data' => $client
             ], 201);
@@ -66,11 +74,10 @@ class ClientController extends Controller
 
     public function search(Request $request)
     {
-
-
         $clients = Client::select('*')
             ->where('registration', $request->search)
             ->orWhere('cpf', $request->search)
+            ->orWhere('contact_phone_1', $request->search)
             ->get();
 
 

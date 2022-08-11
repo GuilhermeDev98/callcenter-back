@@ -17,7 +17,7 @@ class CheckIfUserCanAccessAction
     public function handle(Request $request, Closure $next)
     {
 
-        $permission = $request->route()->action['as'];
+        //$permission = $request->route()->action['as'];
         
         /*if(!auth()->user()->role->permissions->pluck('name')->contains($permission)){
             abort(401, 'Not Authorized');

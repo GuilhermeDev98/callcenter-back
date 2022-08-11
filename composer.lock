@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0499376c775b331254939ad7152650df",
+    "content-hash": "3235e784fdbdb40cd1f093d709c8e5fc",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1153,16 +1153,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.2",
+            "version": "7.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4"
+                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ac1ec1cd9b5624694c3a40be801d94137afb12b4",
-                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
+                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.2"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.4"
             },
             "funding": [
                 {
@@ -1273,7 +1273,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-20T14:16:28+00:00"
+            "time": "2022-06-09T21:39:15+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -5624,6 +5624,71 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.4"
             },
             "time": "2021-12-08T09:12:39+00:00"
+        },
+        {
+            "name": "total-voice/php-client",
+            "version": "1.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/totalvoice/totalvoice-php.git",
+                "reference": "7e05f3c91536b2e032b4d7617e150d9773d5a712"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/totalvoice/totalvoice-php/zipball/7e05f3c91536b2e032b4d7617e150d9773d5a712",
+                "reference": "7e05f3c91536b2e032b4d7617e150d9773d5a712",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TotalVoice\\": [
+                        "src",
+                        "test"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diego Wagner",
+                    "email": "diegowagner4@gmail.com"
+                },
+                {
+                    "name": "Carlos Henrique dos Santos",
+                    "email": "carlossantosdm@gmail.com"
+                }
+            ],
+            "description": "Client para integração com API da Total Voice",
+            "keywords": [
+                "Chamadas",
+                "Composto",
+                "Conferência",
+                "Gerente de Contas",
+                "Integração",
+                "Minha Conta",
+                "Total Voice",
+                "api",
+                "audio",
+                "central",
+                "sms",
+                "test",
+                "tts"
+            ],
+            "support": {
+                "issues": "https://github.com/totalvoice/totalvoice-php/issues",
+                "source": "https://github.com/totalvoice/totalvoice-php/tree/1.17.0"
+            },
+            "time": "2021-08-30T19:31:50+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

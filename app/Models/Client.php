@@ -45,5 +45,9 @@ class Client extends Model
         return $this->HasMany('App\Models\Attendance', 'client_id', 'user_id');
     }
 
+    public function documents() {
+        return $this->HasMany('App\Models\Document', 'client_id', 'user_id');
+    }
+
     //protected $hidden = ['id'];
 }

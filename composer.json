@@ -9,10 +9,11 @@
         "algolia/scout-extended": "^2.0",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^3.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.15",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "total-voice/php-client": "^1.17"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
